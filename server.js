@@ -40,6 +40,11 @@ app.post("/tasks", (req, res) => {
   res.status(201).json(newTask);
 });
 
+// Rota para listar todas as tasks
+app.get("/tasks/", (req, res) => {
+  res.json(tasks);
+});
+
 // Iniciando o servidor
 app.listen(PORT, () => {
   console.log(`Server running on https://localhost:${PORT}`);
