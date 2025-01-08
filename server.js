@@ -58,6 +58,25 @@ app.get("/tasks/:id", (req, res) => {
   res.json(task);
 });
 
+// Rota para atualizar uma task
+app.put("/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  const { title, description, status } = req.body;
+
+  const task = tasks.find((t) => t.id === parseInt(id));
+  // Validacao
+  if (!task) {
+    return res.status(404).json({ error: "Tarefa não encontrada" });
+  }
+  // Atualizacao, se ha o dado, substui
+  if (title) task.title = title;
+  if (description) task.description = description;
+  if (status) task.status = status;
+
+  res.json * task;
+});
+
+
 // Iniciando o servidor
 app.listen(PORT, () => {
   console.log(`Server running on https://localhost:${PORT}`);
