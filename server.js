@@ -42,6 +42,9 @@ app.post("/tasks", (req, res) => {
 
 // Rota para listar todas as tasks
 app.get("/tasks/", (req, res) => {
+  if (tasks.length === 0) {
+    return res.status(200).json({ status: "Sem tarefas cadastradas" });
+  }
   res.json(tasks);
 });
 
@@ -73,7 +76,7 @@ app.put("/tasks/:id", (req, res) => {
   if (description) task.description = description;
   if (status) task.status = status;
 
-  res.json * task;
+  res.json(task);
 });
 
 // Rota para deletar uma task
@@ -84,8 +87,8 @@ app.delete("/tasks/:id", (req, res) => {
   if (index === -1) {
     return res.status(404).json({ error: "Tarefa não encontrada" });
   }
-  tasks.splice(index,1)
-  res.status(204).send()
+  tasks.splice(index, 1);
+  res.status(204).send();
 });
 
 // Iniciando o servidor
