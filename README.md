@@ -3,7 +3,7 @@ Este é um entre muitos projetos que criei para ampliar meu conhecimento e enten
 Para instalar o projeto
 
 ```
-  npm i
+npm i
 ```
 
 Para rodar o projeto
