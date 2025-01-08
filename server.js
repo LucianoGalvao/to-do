@@ -76,6 +76,17 @@ app.put("/tasks/:id", (req, res) => {
   res.json * task;
 });
 
+// Rota para deletar uma task
+app.delete("/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  const index = tasks.findIndex((t) => t.id === parseInt(id));
+
+  if (index === -1) {
+    return res.status(404).json({ error: "Tarefa não encontrada" });
+  }
+  tasks.splice(index, 1);
+  res.status(204).send(); //
+});
 
 // Iniciando o servidor
 app.listen(PORT, () => {
