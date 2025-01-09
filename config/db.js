@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
 // URL de conexão ao MongoDB (substitua pela sua string de conexão)
