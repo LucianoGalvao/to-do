@@ -9,7 +9,12 @@ const PORT = 3000;
 // Importa funçao de DB
 const connectDB = require("./db");
 const Task = require("./models/tasks");
+const User = require("./models/user");
+
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = process.env.JWT_KEY;
 
 // Conecta ao MongoDB
 connectDB();
@@ -48,8 +53,25 @@ app.post("/tasks", async (req, res) => {
   }
 });
 
+const authenticateToken = (req, res, next) => {
+  const token = req.header("Authorization")?.split(" ")[1];
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ error: "Acesso negado, Token não fornecido" });
+  }
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    res.status(403).json({ error: "Token inválido ou expirado" });
+  }
+};
+
 // Rota para listar todas as tasks
-app.get("/tasks/", async (req, res) => {
+app.get("/tasks/", authenticateToken, async (req, res) => {
   try {
     const tasks = await Task.find();
     if (tasks.length === 0) {
@@ -114,6 +136,48 @@ app.delete("/tasks/:id", async (req, res) => {
     res.status(202).json({ message: "Tarefa removida com sucesso" });
   } catch (err) {
     res.status(500).json({ error: "Erro ao deletar tarefa" });
+  }
+});
+
+app.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    // Hash da senha
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Cria usuario
+    const newUser = User.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
+    res.status(201).json({ message: "Usuário registrado com sucesso" });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao registrar o usuário" });
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: "Senha inválida" });
+    }
+
+    // Gera JWT
+    const token = jwt.sign({ id: user._id, email: user.email }, SECRET_KEY, {
+      expiresIn: "1h",
+    });
+    res.status(200).json({ message: "Login bem-sucesdido", token });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
