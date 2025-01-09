@@ -1,9 +1,16 @@
+// Chama o dotenv para as variaveis de ambiente
+require("dotenv").config(); // Carregar as variáveis de ambiente
 // Importando o express
 const express = require("express");
 // Instanciando o express, chamando de app, para poder realizar as chamadas
 const app = express();
 // Definindo o número da porta
 const PORT = 3000;
+// Importa funçao de DB
+const connectDB = require("./db");
+
+// Conecta ao MongoDB
+connectDB();
 
 // Usando um middleware (intermediário) para processar a requisição
 app.use(express.json());
