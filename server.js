@@ -8,6 +8,7 @@ const app = express();
 const PORT = 3000;
 // Importa funçao de DB
 const connectDB = require("./db");
+const Task = require("./models/tasks");
 
 // Conecta ao MongoDB
 connectDB();
@@ -24,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 // Rota para criacao de uma task
-app.post("/tasks", (req, res) => {
+app.post("/tasks", async (req, res) => {
   const { title, description } = req.body;
 
   // Validacao basica se ha um titulo
@@ -43,8 +44,18 @@ app.post("/tasks", (req, res) => {
   // Adiciona a nova task ao array de tasks
   tasks.push(newTask);
 
-  // Retorna a nova task criada
-  res.status(201).json(newTask);
+  try {
+    const newTask = new Task({
+      title,
+      description,
+    });
+    await newTask.save();
+    res.status(201).json(newTask);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: "Erro ao salvar a tarefa no banco de dados" });
+  }
 });
 
 // Rota para listar todas as tasks
