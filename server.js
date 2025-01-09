@@ -32,17 +32,6 @@ app.post("/tasks", async (req, res) => {
   if (!title) {
     return res.status(400).json({ error: 'O campo "title", é obrigatório!' });
   }
-  // Inicializador default para as tasks
-  const newTask = {
-    id: tasks.length + 1,
-    title,
-    description: description || "",
-    status: "Pendente",
-    createdAt: new Date(),
-  };
-
-  // Adiciona a nova task ao array de tasks
-  tasks.push(newTask);
 
   try {
     const newTask = new Task({
