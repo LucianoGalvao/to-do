@@ -3,15 +3,15 @@ Este é um entre muitos projetos que criei para ampliar meu conhecimento e enten
 
 **Descricão do projeto:**
 Um sistema "to-do" criado para entender alguns conceitos básicos de NodeJS, mas que fui aprimorando para testar e ver como funcionam as coisas
- - [ ] Criação e configuração do projeto
- - [ ] Criação de rotas básicas conectando o servidor na porta 3000
- - [ ] Criação das rotas do CRUD (GET, POST, PUT & DELETE) para as tarefas
- - [ ] Testes no Postman
- - [ ] Conexão com o banco de dados (MongoDB)
- - [ ] Atualização de rotas para utilizar o BD
- - [ ] Rota para registro/login de usuarios
- - [ ] Criação de um middleware para proteger as rotas para usuários logados (JWT)
- - [ ] Reestruturação do projeto para ficar melhor organizado em pastas (config, controlares, middleware, models e routes)
+ - [x] Criação e configuração do projeto
+ - [x] Criação de rotas básicas conectando o servidor na porta 3000
+ - [x] Criação das rotas do CRUD (GET, POST, PUT & DELETE) para as tarefas
+ - [x] Testes no Postman
+ - [x] Conexão com o banco de dados (MongoDB)
+ - [x] Atualização de rotas para utilizar o BD
+ - [x] Rota para registro/login de usuarios
+ - [x] Criação de um middleware para proteger as rotas para usuários logados (JWT)
+ - [x] Reestruturação do projeto para ficar melhor organizado em pastas (config, controlares, middleware, models e routes
  - [ ] Validação de dados (express-validator)
  - [ ] Testes automatizados (Jest)
  - [ ] Configuração e deploy (Heroku)
