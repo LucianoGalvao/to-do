@@ -1,6 +1,9 @@
 ## Aviso
 Este é um entre muitos projetos que criei para ampliar meu conhecimento e entender um pouco mais de backend.
 
+
+Versão node utilizada: v18.18.2
+
 **Descricão do projeto:**
 Um sistema "to-do" criado para entender alguns conceitos básicos de NodeJS, mas que fui aprimorando para testar e ver como funcionam as coisas
  - [x] Criação e configuração do projeto
