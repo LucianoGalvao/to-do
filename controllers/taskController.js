@@ -34,7 +34,6 @@ const getTasks = async (req, res) => {
   }
 };
 
-// Rota para buscar uma task por id
 const getTaskById = async (req, res) => {
   const { id } = req.params;
   try {
