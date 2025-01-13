@@ -1,11 +1,14 @@
 const Task = require("../models/taskModel");
 const mongoose = require("mongoose");
+const { validationResult } = require("express-validator");
 
 const createTask = async (req, res) => {
   const { title, description } = req.body;
   if (!title) {
     return res.status(400).json({ error: 'O campo "title", é obrigatório!' });
   }
+
+ 
 
   try {
     const newTask = new Task({
@@ -75,14 +78,14 @@ const deleteTask = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const task = await Task.findOneAndDelete(id);
+    const task = await Task.findOneAndDelete({ _id: id });
     if (!task) {
       return res.status(404).json({ error: "Tarefa não encontrada" });
     }
 
     res.status(202).json({ message: "Tarefa removida com sucesso" });
   } catch (err) {
-    res.status(500).json({ error: "Erro ao deletar tarefa" });
+    res.status(500).json({ error: "Erro ao deletar tarefa" + err });
   }
 };
 
