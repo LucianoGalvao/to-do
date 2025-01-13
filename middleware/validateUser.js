@@ -1,4 +1,5 @@
 const { body } = require("express-validator");
+const User = require("../models/userModel");
 
 const validateRegister = [
   body("username").notEmpty(),
@@ -8,7 +9,13 @@ const validateRegister = [
     .withMessage("Por favor, insira um e-mail válido.")
     .matches(/^\S*$/)
     .withMessage("A senha não pode conter espaços em branco.")
-    .normalizeEmail(),
+    .normalizeEmail()
+    .custom(async (email) => {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        throw new Error("Este e-mail já está cadastrado.");
+      }
+    }),
   body("password")
     .notEmpty()
     .isLength({ min: 8 })
