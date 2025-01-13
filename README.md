@@ -14,7 +14,7 @@ Um sistema "to-do" criado para entender alguns conceitos básicos de NodeJS, mas
  - [x] Atualização de rotas para utilizar o BD
  - [x] Rota para registro/login de usuarios
  - [x] Criação de um middleware para proteger as rotas para usuários logados (JWT)
- - [x] Reestruturação do projeto para ficar melhor organizado em pastas (config, controlares, middleware, models e routes
+ - [x] Reestruturação do projeto para ficar melhor organizado em pastas (config, controlares, middleware, models e routes)
  - [ ] Validação de dados (express-validator)
  - [ ] Testes automatizados (Jest)
  - [ ] Configuração e deploy (Heroku)
