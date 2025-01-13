@@ -4,11 +4,11 @@ const { validationResult } = require("express-validator");
 
 const createTask = async (req, res) => {
   const { title, description } = req.body;
-  if (!title) {
-    return res.status(400).json({ error: 'O campo "title", é obrigatório!' });
-  }
 
- 
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   try {
     const newTask = new Task({
