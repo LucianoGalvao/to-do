@@ -1,14 +1,14 @@
 {
   "name": "to-do-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend para uma aplicação de 'To do'",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "NODE_ENV=test jest --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Luciano Galvão Jr",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
